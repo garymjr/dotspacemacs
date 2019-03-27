@@ -1,4 +1,4 @@
-;;; packages.el --- web layer packages file for Spacemacs.
+;;; packages.el --- personal layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
@@ -18,20 +18,20 @@
 ;;
 ;;
 ;; Briefly, each package to be installed or configured by this layer should be
-;; added to `web-packages'. Then, for each package PACKAGE:
+;; added to `personal-packages'. Then, for each package PACKAGE:
 ;;
 ;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `web/init-PACKAGE' to load and initialize the package.
+;;   function `personal/init-PACKAGE' to load and initialize the package.
 
 ;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `web/pre-init-PACKAGE' and/or
-;;   `web/post-init-PACKAGE' to customize the package as it is loaded.
+;;   define the functions `personal/pre-init-PACKAGE' and/or
+;;   `personal/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
 
-(defconst web-packages
-  '(web-mode)
-  "The list of Lisp packages required by the web layer.
+(defconst personal-packages
+  '(web-mode doom-modeline)
+  "The list of Lisp packages required by the personal layer.
 
 Each entry is either:
 
@@ -58,9 +58,9 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-(defun web/init-web-mode ()
+(defun personal/init-web-mode ()
   (use-package web-mode
-    :defer t
+    :ensure t
     :mode ("\\.html\\'"
            "\\.css\\'"
            "\\.jsx?\\'"
@@ -77,5 +77,10 @@ Each entry is either:
           web-mode-style-padding 0
           web-mode-enable-auto-quoting nil)))
 
+(defun personal/init-doom-modeline ()
+  (use-package doom-modeline
+    :ensure t
+    :config
+    (doom-modeline-mode)))
 
 ;;; packages.el ends here
